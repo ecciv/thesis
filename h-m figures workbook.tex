@@ -1,0 +1,237 @@
+\documentclass[]{thesis}
+\usepackage[siunitx, RPvoltages]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{math} %needs tikz library
+
+\begin{document}
+
+This document was used for generating figures in an isolated document. The code can be freely copy-pasted into your main text, for use in your work. If you make modifications to these figures, I wish that you make them available e.g. by branching and requesting a merge, so that everyone can have easy access to high-quality figures related to the Hendrikse-Metrikine (TU Delft 2018) ice-model for simulating dynamic ice-structure interaction on vertically sided structures.
+
+\begin{figure}[h]
+\centering
+	\tikzmath{\u = 0.66; }
+	\begin{circuitikz}[line width=0.6pt] \draw
+		
+		(0,0) to[damper=$C_2*$] (2,0) -- (2,\u) to[L=$K_1$] (4,\u) -- (4,0) to[L=$K_2*$] (6,0)
+		
+		(2,0) 	-- (2,-\u) to[damper=$C_1$] (4,-\u) -- (4,0)
+		
+		(0,-1) 	-- (0,1+\u) to[short=$p_{i,ice}$] (\u,1+\u) node[currarrow]{}
+		
+		(2,0) 	-- (2,1+\u) to[short=$u_{i,3}$] (2+\u,1+\u) node[currarrow]{}
+		
+		(4,0) 	-- (4,1+\u) to[short=$u_{i,2}$] (4+\u,1+\u) node[currarrow]{}	
+		
+		(6,-1) 	-- (6,1+\u) to[short=$u_{i,1}$] (6+\u,1+\u) node[currarrow]{}
+		
+		(7+\u,0) to[short=$F_{ice}$] (6+\u,0) node[currarrow,xscale=-1]{}
+		
+		;
+	\end{circuitikz}
+\label{}
+\caption{This figure represents something.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\tikzmath{\u = 0.66; \h = 0.66/3; \hh = 2 - \h; }
+	\begin{circuitikz}[line width=0.6pt] 
+
+	\foreach \y in {0,\h,...,\hh}	
+		\tikzmath{\r = rand/5; }
+		\draw
+		(\u,\y) --	(\r + 1.1,\y)	-- (\r + 1.1,\y+\h)-- (\u,\y+\h);
+	\draw
+		(1.33 + \u,0) rectangle (3.33 + \u,2)
+	 	(3.33 + \u,1-\u) to[damper=$C_{struc}$] (5.33 + \u,1-\u)
+		(3.33 + \u,1+\u) to[L=$K_{struc}$] (5.33 + \u,1+\u)
+		(5.33 + \u,0) -- 	 (5.33 + \u,2)
+		(-1 ,0.4) to[short=$v_{ice}$] (-1+\u,0.4) node[currarrow]{};
+		
+		\draw [|-|] (0.9,-2*\h) -- node[below] {$r_{max}$} (1.3,-2*\h);
+	
+	\node[align=center] at (2.33 + \u,1) {$M_{struc}$}
+	node[] at (- 1+0.5*\u,1.5) {$N$ elements}
+	node[anchor=mid] at (3.33 + 0.5*\u, 2 + \u) {Structure}
+	node[anchor=mid] at (0 + 0.0*\u, 2 + \u) {Ice edge};
+	
+	\end{circuitikz}
+	\label{}
+	\caption{This figure represents something.}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\tikzmath{\u = 0.66; }
+	\begin{circuitikz}[line width=0.6pt] \draw
+		
+		(0.1,-1) node[currarrow,xscale=-1]{} to[short=$l_{initial} - F/K_1-F/K_2-F/K_{struc}$] (5.9,-1) node[currarrow,xscale=1]{}
+		(4,0) -- (4,1) 
+		
+		(0,-\u) -- (0,1) 
+		(-\u,1) node[currarrow,xscale=-1]{} to[short=$v_{creep flow}$] (0,1) 
+		(6,-\u) -- (6,1)
+		(0,0) to[L=$K_1$] (2,0) to[L=$K_2*$] (4,0) to [L=$K_{struc}$] (6,0);
+		\node[anchor=south] at (4,1) {Ice edge}
+		;
+		
+	\end{circuitikz}
+	\label{}
+	\caption{This figure represents something.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\tikzmath{\u = 0.66; }
+	\begin{circuitikz}[line width=0.6pt] \draw
+		
+		(0.1,-1) node[currarrow,xscale=-1]{} to[short=$l_{initial} - F/K_1-F/K_2-F/K_{struc}$] (5.9,-1) node[currarrow,xscale=1]{}
+		(4,0) -- (4,1) 
+		
+		(0,-\u) -- (0,1) 
+		(-2,-\u) -- (-2,\u)
+		
+		(-\u,1) node[currarrow,xscale=-1]{} to[short=$v_{creep flow}$] (0,1) 
+		(6,-\u) -- (6,\u)
+		(-2,0) to [damper=$C_2*$](0,0) to[L=$K_1$] (2,0) to[L=$K_2$] (4,0) to [L=$K_{struc}*$] (6,0);
+		\node[anchor=south] at (4,1) {Ice edge}
+		;
+		
+	\end{circuitikz}
+	\label{}
+	\caption{This figure represents something.}
+\end{figure}
+
+
+
+\begin{figure}[h]
+	\centering
+	\tikzmath{\u = 0.66; }
+	\tikzset{>=stealth}
+	\begin{circuitikz}[line width=0.6pt]
+	
+	%%Axis
+	\draw	[->](0,0) -- (0,3.5);
+	\draw	[->](0,0) -- (6,0);
+	
+	%Labels
+	\node [anchor=east] at (0,3.6/2){$F_{ice}$};
+	\node [anchor=north] at (6/2,0){$v_{ice}$};
+	\node[anchor=north east] at (0,0) {$0$};
+	
+	%Above graph
+	\draw [|-|] (0,4) -- (1,4);
+	\node [anchor=south] at (0.5,4){Creep};
+	\draw [|->] (1,4) -- (6,4);
+	\node [anchor=south] at (3,4){Crushing};
+	
+	%Transition speed & Force
+	\filldraw (1,3) circle (1pt) node[anchor=south]{$F_t$};
+	\draw[dashed] (1,3) -- (1,0) node[anchor=north]{$v_{t}$};
+	
+	\filldraw (6,1) circle (1pt) node[anchor=west]{${F(v_{ice}\rightarrow\infty)} = \frac{{N{K_2}{\delta _{crit}}}}{{{r_{max }} + 2{\delta _{crit}}}}$};
+	
+	\filldraw (6,1.3+2/6^3) circle (1pt) node[anchor=south west]{$F(v_{ice}\rightarrow\infty)+\sigma(v_{ice}\rightarrow\infty)$};
+	
+	\draw[<-] (1.5,1+2/1.5^4) -- (2.5,2+2/1.5^4);
+	\filldraw (2.5,2+2/1.5^4) circle (1pt) node[anchor=south west]{$F(v_{ice})=F(N,K_1,K_2,C_1,C_2,r_{max},\delta_{crit})$};
+	
+	%Functions
+	\draw[scale=1, domain=0:1, smooth,samples=200, variable=\x, black] plot ({\x}, {3*\x^0.333});
+	\draw[scale=1, domain=1:6, smooth,samples=200, variable=\x, black] plot ({\x}, {1+2/(\x^4)});
+	\draw[scale=1, dotted, domain=2:6, smooth,samples=200, variable=\x, black] plot ({\x}, {0.7+1.7/(\x^4)});
+	\draw[scale=1, dotted, domain=2:6, smooth,samples=200, variable=\x, black] plot ({\x}, {1.3+2.3/(\x^4)});
+			
+	%Legend
+	\draw[] (6.7,0.22) -- (7.7,0.22) node[anchor=west]{Mean};
+	\draw[dotted] (6.7,-0.22) -- (7.7,-0.22) node[anchor=west]{Mean $\pm$ st. dev.};
+	
+	\end{circuitikz}
+	\label{fig:f-v-tikz}
+	\caption{This figure represents something.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\tikzmath{\u = 0.66; }
+	\tikzset{>=stealth}
+	\begin{circuitikz}[line width=0.6pt]
+		
+		%%Axis
+		\draw	[->](0,0) -- (0,3.5);
+		\draw	[->](0,0) -- (6,0);
+		
+		%Labels
+		\node [anchor=east] at (0,3.6/2){$F_{ice}$};
+		\node [anchor=north] at (6/2,0){$v_{ice}$};
+		\node[anchor=north east] at (0,0) {$0$};
+		
+		%Above graph
+		\draw [|-|] (0,4) -- (1,4);
+		\node [anchor=south] at (0.5,4){Creep};
+		\draw [|->] (1,4) -- (6,4);
+		\node [anchor=south] at (3,4){Crushing};
+		
+		%Transition speed & Force
+		\filldraw (1,3) circle (1pt) node[anchor=south]{$F_t$};
+		\draw[dashed] (1,3) -- (1,0) node[anchor=north]{$v_{t}$};
+		
+		%\filldraw (6,1) circle (1pt) node[anchor=west]{${F(v_{ice}\rightarrow\infty)} = %\frac{{N{K_2}{\delta _{crit}}}}{{{r_{max }} + 2{\delta _{crit}}}}$};
+		
+		%\filldraw (6,1.3+2/6^3) circle (1pt) node[anchor=south west]{$F(v_{ice}\rightarrow\infty)+\sigma(v_{ice}\rightarrow\infty)$};
+		
+		%\draw[<-] (1.5,1+2/1.5^4) -- (2.5,2+2/1.5^4);
+		%\filldraw (2.5,2+2/1.5^4) circle (1pt) node[anchor=south west]{$F(v_{ice})=F(N,K_1,K_2,C_1,C_2,r_{max},\delta_{crit})$};
+		
+		%Functions
+		\draw[scale=1, domain=0:1, smooth,samples=200, variable=\x, black] plot ({\x}, {3*\x^0.333});
+		\draw[scale=1, domain=1:6, smooth,samples=200, variable=\x, black] plot ({\x}, {1+2/(\x^4)});
+		\draw[scale=1, dotted, domain=2:6, smooth,samples=200, variable=\x, black] plot ({\x}, {0.7+1.7/(\x^4)});
+		\draw[scale=1, dotted, domain=2:6, smooth,samples=200, variable=\x, black] plot ({\x}, {1.3+2.3/(\x^4)});
+		
+		%Legend
+		\draw[] (6.7,1+0.22) -- (7.7,1+0.22) node[anchor=west]{Mean};
+		\draw[dotted] (6.7,1-0.22) -- (7.7,1-0.22) node[anchor=west]{Mean $\pm$ st. dev.};
+		
+	\end{circuitikz}
+	\label{fig:f-v-tikz}
+	\caption{This figure represents something.}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\tikzset{>=stealth}
+	\tikzmath{\u = 0.66; }
+	\begin{circuitikz}[line width=0.6pt, scale=0.8, every node/.style={scale=0.8}]
+		
+		\draw(0,0) rectangle (6,-1);
+		\draw[->] (3,-1) to (3,-2);
+		\draw(0,-2) rectangle (6,-3.5);
+		\draw[->] (3,-3.5) to (3,-4.5);
+		\draw(0,-4.5) rectangle (6,-5.5);
+		\draw[->] (3,-5.5) to (3,-6.5);			
+		\draw(0,-6.5) rectangle (6,-7.5);
+		\draw[->] (3,-7.5) to (3,-8.5);			
+		\draw(0,-8.5) rectangle (6,-10);			
+		\draw[->] (3,-10) to (3,-11.5);				
+		\draw[->] (6,-9) to (7,-9) to (7,-5) to (6,-5);				
+
+		\node[anchor=mid] at (3,-0.5) {Acquire $\delta_{crit}$ from literature};
+		\node[anchor=mid,align=center] at (3,-3) {Solve $N$, $r_{max}$, $K_2$ based on $F_t$,\\ $F(v_{ice}\rightarrow\infty)$, and their ratio.};
+		\node[anchor=mid,align=center] at (3,-5) {Guess $C_1$, $K_1$};
+		\node[anchor=mid,align=center] at (3,-7) {Calculate $C_2$};
+		\node[anchor=mid,align=center] at (3,-9.5) {Run simulation;\\ are results acceptable?};	
+		\node[anchor=west,align=center] at (3,-10.75) {if yes};	
+		\node[anchor=west,align=center] at (7,-7) {if no};	
+		\node[anchor=mid,align=center] at (3,-12) {Done};		
+
+
+	\end{circuitikz}
+	\label{fig:2-DOF}
+	\caption{This figure represents something.}
+\end{figure}
+
+
+\end{document}
